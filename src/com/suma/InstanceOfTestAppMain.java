@@ -2,6 +2,7 @@ package com.suma;
 
 import com.suma.supermarket.LittleSuperMarket;
 import com.suma.supermarket.Merchandise;
+import com.suma.supermarket.Phone;
 import com.suma.supermarket.PhoneMerchandise;
 
 public class InstanceOfTestAppMain {
@@ -17,6 +18,11 @@ public class InstanceOfTestAppMain {
                 System.out.println(ph.getBrand());
             }
         }
+
+        PhoneMerchandise m2 = new PhoneMerchandise(200,"ID"+10,"商品"+10,999,1999,
+                4.5,2100,8,512,"SAMSUNG",
+                "Android");
+        System.out.println(m2 instanceof Merchandise);
         // >> TODO 如果引用是null,则肯定返回false
 
     }

@@ -2,6 +2,7 @@ package com.suma.supermarket;
 
 import com.suma.person.Customer;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LittleSuperMarket {
@@ -11,6 +12,18 @@ public class LittleSuperMarket {
     public double incomingSum;
     public Merchandise[] merchandises;
     public int[] merchandiseSold;
+
+    @Override
+    public String toString() {
+        return "LittleSuperMarket{" +
+                "superMarketName='" + superMarketName + '\'' +
+                ", address='" + address + '\'' +
+                ", parkingCount=" + parkingCount +
+                ", incomingSum=" + incomingSum +
+                ", merchandises=" + Arrays.toString(merchandises) +
+                ", merchandiseSold=" + Arrays.toString(merchandiseSold) +
+                '}';
+    }
 
     // >> TODO 构造方法和类同名，且无返回值，构造方法无法被点操作符或在普通方法里调用
     public LittleSuperMarket(String address, String superMarketName, int parkingCount) {
@@ -23,18 +36,18 @@ public class LittleSuperMarket {
 
         for (int i = 0; i < all.length; i++) {
             Merchandise m = null;
-            if(i > 0 && i %100 == 0){
+            if (i > 0 && i % 100 == 0) {
                 m = new ShellColorChangePhone(
-                        200,"ID"+i,"商品"+i,999,1999,
-                        4.5,2100,8,512,"XIAOMI",
-                        "Android",true);
-            }else if(i > 0 && i%10 ==0){
-                m = new PhoneMerchandise(200,"ID"+i,"商品"+i,999,1999,
-                        4.5,2100,8,512,"SAMSUNG",
+                        200, "ID" + i, "商品" + i, 999, 1999,
+                        4.5, 2100, 8, 512, "XIAOMI",
+                        "Android", true);
+            } else if (i > 0 && i % 10 == 0) {
+                m = new PhoneMerchandise(200, "ID" + i, "商品" + i, 999, 1999,
+                        4.5, 2100, 8, 512, "SAMSUNG",
                         "Android");
-            }else{
-                m = new Merchandise(200,"ID"+i,"商品"+i,
-                        Math.random() *200,(1+Math.random())*200);
+            } else {
+                m = new Merchandise(200, "ID" + i, "商品" + i,
+                        Math.random() * 200, (1 + Math.random()) * 200);
             }
             all[i] = m;
         }
@@ -136,8 +149,22 @@ public class LittleSuperMarket {
         return curr;
     }
 
-    public Merchandise getMerchandiseOf(int MerchandiseIndex){
+    public Merchandise getMerchandiseOf(int MerchandiseIndex) {
         return merchandises[MerchandiseIndex];
     }
 
+    public boolean findMerchandise(Merchandise target) {
+        int i = 0;
+        for (Merchandise m : merchandises) {
+            boolean match = m.equals(target);
+            if (match) {
+                System.out.println("找到了商品,位置在" + i);
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
 }
+
+

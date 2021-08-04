@@ -1,5 +1,7 @@
 package com.suma.supermarket;
 
+import java.util.Objects;
+
 public class Merchandise {
     private String name;
     private String id;
@@ -41,6 +43,25 @@ public class Merchandise {
     // >> TODO 如果要读写这些成员变量，最好使用get set方法，这些方法应该是public的
     // >> TODO 这样做的好处是，如果有需要，可以通过代码，检查每个属性值是否合法
     // >> TODO 非public的类，可以文件名和类不同名，但是不能在包外被使用
+
+
+    // >> TODO hashCode 和equals是我们常覆盖的两个方法
+    // >> TODO 覆盖的原则是,equal为true则hashCode就应该相等,这是一种约定俗成的规范
+    // >> TODO 即equals为true是hashCode相等的充分非必要条件
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Merchandise)) return false;
+        Merchandise that = (Merchandise) o;
+        return getCount() == that.getCount() && Double.compare(that.getSoldPrice(), getSoldPrice()) == 0 && Double.compare(that.getPurchasePrise(), getPurchasePrise()) == 0 && getName().equals(that.getName()) && getId().equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getId(), getCount(), getSoldPrice(), getPurchasePrise());
+    }
 
     public String getName() {
         return name;
@@ -140,5 +161,9 @@ public class Merchandise {
         } else {
             return totalCost;
         }
+    }
+
+    public static String getNameOf(Merchandise m){
+        return m.getName();
     }
 }

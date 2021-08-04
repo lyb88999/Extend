@@ -6,6 +6,7 @@ public class RunLittleSuperMarket {
     public static void main(String[] args) {
         LittleSuperMarket littlesupermarket = new LittleSuperMarket("世纪大道666号", "有家超市", 200);
         littlesupermarket.run();
+        //System.out.println(littlesupermarket.toString());
     }
 }
 
