@@ -15,8 +15,13 @@ public class ReflectionAppMain {
         // >> TODO 另一种获得Class实例的方法,直接类名点
         Class clazz = Merchandise.class;
 
-        // >> TODO 利用反射获取变量的值
+        // >> TODO 利用反射获取变量的值 getField可生成有访问权限的field也就是public 对于private要用getDeclaredField(*) 对于方法同样getDeclaredMethod
         //Field countField = clazz.getField("count");
+        Field countField = clazz.getDeclaredField("count");
+        countField.setAccessible(true);
+        System.out.println(countField.get(m100));
+        countField.set(m100, 999);
+        System.out.println(countField.get(m100));
         //System.out.println(countField.get(m100));
         //System.out.println(m100.getCount());
         //countField.set(m100,999);
@@ -35,17 +40,17 @@ public class ReflectionAppMain {
 
         // >> TODO 利用反射调用静态方法
         Method StaticGetNameMethod = clazz.getMethod("getNameOf", Merchandise.class);
-        String str = (String)StaticGetNameMethod.invoke(null,superMarket.getMerchandiseOf(10));
+        String str = (String) StaticGetNameMethod.invoke(null, superMarket.getMerchandiseOf(10));
         // >> TODO 这里返回值是一个Object 利用强制类型转换将其转化为String
         System.out.println(str);
 
         // >> TODO test
         Method BuyMethod = clazz.getMethod("buy", int.class);
-        BuyMethod.invoke(m100,10);
+        BuyMethod.invoke(m100, 10);
     }
 
-    public static void printField(Class clazz){
-        System.out.println(clazz.getName()+"里的field");
+    public static void printField(Class clazz) {
+        System.out.println(clazz.getName() + "里的field");
         for (Field field : clazz.getFields()) {
             System.out.println(field.getType() + " " + field.getName());
         }
